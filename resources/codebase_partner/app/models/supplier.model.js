@@ -1,5 +1,5 @@
-const mysql = require("mysql2");
-const dbConfig = require("../config/config");
+import mysql from "mysql2";
+import dbConfig from "../config/config.js";
 // constructor
 const Supplier = function (supplier) {
     this.id = supplier.id;
@@ -123,4 +123,5 @@ Supplier.removeAll = result => {
     });
 };
 
-module.exports = Supplier;
+
+export default Supplier;

@@ -1,10 +1,8 @@
-const Supplier = require("../models/supplier.model.js");
+import Supplier from "../models/supplier.model.js";
+import {body, validationResult} from "express-validator";
 
 
-const {body, validationResult} = require("express-validator");
-
-
-exports.create = [
+export const create = [
 
     // Validate and sanitize the name field.
     body('name', 'The student name is required').trim().isLength({min: 1}).escape(),
@@ -36,7 +34,7 @@ exports.create = [
     }
 ];
 
-exports.findAll = (req, res) => {
+export const findAll = (req, res) => {
     Supplier.getAll((err, data) => {
         if (err)
             res.render("500", {message: "The was a problem retrieving the list of students"});
@@ -44,7 +42,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findOne = (req, res) => {
+export const findOne = (req, res) => {
     Supplier.findById(req.params.id, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
@@ -59,7 +57,7 @@ exports.findOne = (req, res) => {
 };
 
 
-exports.update = [
+export const update = [
 
     // Validate and sanitize the name field.
     body('name', 'The student name is required').trim().isLength({min: 1}).escape(),
@@ -102,7 +100,7 @@ exports.update = [
     }
 ];
 
-exports.remove = (req, res) => {
+export const remove = (req, res) => {
     Supplier.delete(req.params.id, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
@@ -116,7 +114,7 @@ exports.remove = (req, res) => {
     });
 };
 
-exports.removeAll = (req, res) => {
+export const removeAll = (req, res) => {
     Supplier.removeAll((err, data) => {
         if (err)
             res.render("500", {message: `Some error occurred while removing all students.`});
